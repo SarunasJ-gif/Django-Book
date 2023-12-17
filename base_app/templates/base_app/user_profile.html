@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+<style>
+    .profile-container {
+        display: grid;
+        /* grid-template-columns: ; */
+    }
+</style>
+
+<a href="{{request.META.HTTP_REFERER}}">Go Back</a>
+    <h1>Profile: {{user.username}}</h1>
+
+        <div class="profile-container">
+            
+            <div>
+                <h3>Email: {{user.email}}</h3>
+                <h3>Name: {{user.name}}</h3>
+                <h3>Last name: {{user.last_name}}</h3>
+                <h3>Phone: {{user.phone}}</h3>
+                {% if user.is_superuser %}
+                <h3>Status: Admin</h3>
+                {% endif %}
+                {% if request.user == user %}
+                <a href="{% url 'update-user' %}">Edit Profile</a>
+                {% endif %}
+            </div>
+            <h4>Added books: </h4>
+            {% for book in books %}
+            <div>
+                <h6>{{book.added}}</h6>
+                <h5> - <a href="{% url 'book' book.id %}">{{book.name}}</a> --  {{book.author}}</h5>
+                <a href="{% url 'update-book' book.id %}">Edit</a>
+                <a href="{% url 'delete-book' book.id %}">Delete</a>
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

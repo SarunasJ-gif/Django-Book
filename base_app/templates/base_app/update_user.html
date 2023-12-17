@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<div>
+    <h5>Edit Your Profile</h5>
+</div>
+<div>
+
+</div>
+<div class="layout__body">
+    <form method="POST" action="">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div>
+        <label for="form_group">{{field.label}}l</label>
+        {{field}}
+    </div>
+    {% endfor %}
+    <!-- <div>
+        <label for="profile__pic">Email</label>
+        <input id="email" name="email" type="text" placeholder="Write email...">
+    </div>
+    <div>
+        <label for="profile__pic">Name</label>
+        <input id="name" name="name" type="text" placeholder="Write name...">
+    </div>
+    <div>
+        <label for="profile__pic">Last name</label>
+        <input id="last-name" name="last-name" type="text" placeholder="Write last name...">
+    </div>
+    <div>
+        <label for="profile__pic">Phone</label>
+        <input id="phone" name="phone" type="text" placeholder="Write phone...">
+    </div>
+    <div>
+        <label for="profile__pic">Avatar</label>
+        <input id="profile_pic" name="profile_pic" type="file">
+    </div> -->
+    <a href="{{request.META.HTTP_REFERER}}">Cancel</a>
+    <button type="submit">Update</button>
+    <!-- {{form.as_p}} -->
+    <!-- <input type="submit" value="Submit"/> -->
+</form>
+</div>
+
+{% endblock content %}

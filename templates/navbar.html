@@ -1,0 +1,24 @@
+{% load static %}
+<img src="{% static 'images/old-books.jpg' %}" style="max-width: 300px; height: auto;">
+<a href="/">
+    <h1>Books library page</h1>    
+</a>
+
+
+<form method="GET" action="{% url 'home' %}">
+    <input type="text" name="q" placeholder="Search book...">
+    <input type="date" name="date_from" placeholder="Date from">
+    <input type="date" name="date_to" placeholder="Date to">
+    <button type="submit">Search</button>
+</form>
+{% if request.user.is_authenticated %}
+<p>Hello {{request.user}}!</p>
+<a href="{% url 'logout' %}">Logout</a>
+
+{% else %}
+
+<a href="{% url 'login' %}">Login</a>
+
+{% endif %}
+
+<hr>

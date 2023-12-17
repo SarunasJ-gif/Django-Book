@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<a href="{% url 'user-profile' book.user.id %}">@{{book.user.username}}</a>
+<h1>  Book: "{{book.name}}" -- author: {{book.author}}</h1>
+<div>{{book.description}}</div>
+{% if book.picture %}
+    <img src="{{ book.picture.url }}" alt="Book Picture">
+  {% endif %}
+
+{% endblock %}

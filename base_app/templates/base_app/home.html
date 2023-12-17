@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Home page</h1>
+
+<div class="home-container">
+    <a href="{% url 'add-book' %}">Add Book</a>
+    <hr/>
+    <div>
+        <h5>Result: {{books_count}}</h5>
+        {% for book in books %}
+            <div>
+                <a href="{% url 'user-profile' book.user.id %}">@{{book.user.username}}</a>
+                <h5> - <a href="{% url 'book' book.id %}">{{book.name}}</a> --  {{book.author}}</h5>
+                {% if book.picture %}
+                <img src="{{ book.picture.url }}" alt="Book Picture">
+                 {% endif %}
+                {% if request.user == book.user or request.user.is_superuser %}
+                <a href="{% url 'update-book' book.id %}">Edit</a>
+                <a href="{% url 'delete-book' book.id %}">Delete</a>
+                {% endif %}
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+    {% if request.GET.q or request.GET.date_from or request.GET.date_to %}
+        <a href="{% url 'home' %}">All books</a>
+    {% endif %}
+</div>
+
+{% endblock %}
